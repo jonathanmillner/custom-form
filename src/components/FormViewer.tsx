@@ -1,4 +1,4 @@
-import React, { JSX, useState } from "react";
+import { JSX, useState, FormEvent } from "react";
 import { createSourceRecord } from "../api";
 import { FormViewerProps } from "../types";
 
@@ -6,6 +6,11 @@ type FormData = Record<string, string | boolean>;
 
 const FormViewer = ({ form }: FormViewerProps): JSX.Element => {
   const [formData, setFormData] = useState<FormData>({});
+  const [savedData, setSavedData] = useState<
+    { question: string; answer: string }[]
+  >([]);
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   if (!form) return <div>No form loaded.</div>;
 
@@ -13,14 +18,16 @@ const FormViewer = ({ form }: FormViewerProps): JSX.Element => {
     setFormData((prev) => ({ ...prev, [fieldKey]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const sourceData = Object.entries(form.fields ?? {}).map(([key, field]) => {
       let answer = formData[key];
+
       if (field.type === "boolean") {
         answer = answer ? "true" : "false";
       }
+
       return {
         question: field.question,
         answer: answer ? String(answer) : "",
@@ -29,16 +36,25 @@ const FormViewer = ({ form }: FormViewerProps): JSX.Element => {
 
     try {
       await createSourceRecord({ formId: form.id, sourceData });
-      alert("Form submitted successfully.");
+
+      setSavedData(sourceData);
+      setErrorMessage("");
       setFormData({});
+      setSuccessMessage("Form data was saved successfully!");
     } catch (error) {
       console.error(error);
-      alert("Failed to submit form.");
+
+      setSavedData([]);
+      setSuccessMessage("");
+      setErrorMessage(
+        "Failed to save form data: " +
+          (error instanceof Error ? error.message : ""),
+      );
     }
   };
 
   return (
-    <div>
+    <div className="form-viewer">
       <h2 className="mb-3">{form.name}</h2>
 
       <form onSubmit={handleSubmit}>
@@ -102,6 +118,32 @@ const FormViewer = ({ form }: FormViewerProps): JSX.Element => {
           Submit Form
         </button>
       </form>
+
+      <div className="generated-data-messages">
+        <div className="mt-4">
+          {successMessage && (
+            <div className="alert alert-success mt-3">{successMessage}</div>
+          )}
+          {errorMessage && (
+            <div className="alert alert-danger mt-3">{errorMessage}</div>
+          )}
+        </div>
+
+        {savedData.length > 0 && (
+          <div className="mt-2">
+            <h5>Saved Data</h5>
+
+            <ul className="list-group">
+              {savedData.map((entry, idx) => (
+                <li key={idx} className="list-group-item">
+                  <strong>{entry.question}</strong>:{" "}
+                  {entry.answer || "(no answer)"}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
