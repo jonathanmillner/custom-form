@@ -1,8 +1,6 @@
 import React, { JSX, useState } from "react";
 import { createSourceRecord } from "../api/endpoints";
 import { FormViewerProps } from "../types";
-import { MODES } from "../constants";
-import FormBuilder from "./FormBuilder/FormBuilder.tsx";
 
 type FormData = Record<string, string | boolean>;
 
@@ -45,7 +43,10 @@ const FormViewer = ({ form }: FormViewerProps): JSX.Element => {
 
       <form onSubmit={handleSubmit}>
         {Object.entries(form.fields ?? {}).map(([key, field]) => (
-          <div className={`mb-3 ${field.type === "boolean" ? "d-flex align-items-center gap-3" : ""}`} key={key}>
+          <div
+            className={`mb-3 ${field.type === "boolean" ? "d-flex align-items-center gap-3" : ""}`}
+            key={key}
+          >
             <label className="form-label">
               {field.question} {field.required && "*"}
             </label>
@@ -96,6 +97,7 @@ const FormViewer = ({ form }: FormViewerProps): JSX.Element => {
             )}
           </div>
         ))}
+
         <button type="submit" className="btn btn-success">
           Submit Form
         </button>

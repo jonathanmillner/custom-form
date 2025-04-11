@@ -62,8 +62,9 @@ const FormBuilder = ({
   };
 
   return (
-    <div>
+    <section className="mb-5 p-4 round-border">
       <h2 className="mb-3">Build Your Form</h2>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Form Name:</label>
@@ -74,8 +75,8 @@ const FormBuilder = ({
             className="form-control"
           />
         </div>
-        <hr />
-        <h4 className="mb-3">Add Field</h4>
+
+        <h4 className="mt-5">Add Field</h4>
         <div className="mb-3">
           <label className="form-label">Field Type:</label>
           <select
@@ -92,6 +93,7 @@ const FormBuilder = ({
             <option value="datetime">Datetime</option>
             <option value="boolean">Boolean</option>
           </select>
+
           <label className="form-label">Question:</label>
           <input
             type="text"
@@ -101,6 +103,7 @@ const FormBuilder = ({
             }
             className="form-control mb-3"
           />
+
           <div className="mb-3 form-check">
             <input
               type="checkbox"
@@ -115,6 +118,7 @@ const FormBuilder = ({
               Required
             </label>
           </div>
+
           <button
             type="button"
             onClick={addField}
@@ -123,22 +127,26 @@ const FormBuilder = ({
             Add Field
           </button>
         </div>
-        <div className="mb-3">
-          <h5>Fields List:</h5>
-          <ul className="list-group">
-            {fieldList.map((field) => (
-              <li key={field.id} className="list-group-item">
-                {field.id}: {field.type} – {field.question}{" "}
-                {field.required ? "(Required)" : ""}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button type="submit" className="btn btn-primary">
+
+        {fieldList.length > 0 && (
+          <div className="my-4">
+            <h5>Fields List:</h5>
+            <ul className="list-group">
+              {fieldList.map((field) => (
+                <li key={field.id} className="list-group-item">
+                  {field.id}: {field.type} – {field.question}{" "}
+                  {field.required ? "(Required)" : ""}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <button type="submit" className="mt-4 btn btn-primary">
           Create Form
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

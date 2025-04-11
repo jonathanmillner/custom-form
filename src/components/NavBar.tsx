@@ -4,7 +4,7 @@ import { MODES } from "../constants";
 
 const NavBar = ({ setMode }: NavBarProps): JSX.Element => {
   return (
-    <nav className="mb-4">
+    <nav className="mb-5 p-4 round-border">
       <button
         onClick={() => setMode(MODES.BUILDER)}
         className="btn btn-primary me-2"
