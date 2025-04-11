@@ -4,5 +4,3 @@ export const MODES = {
 } as const;
 
 export type Mode = (typeof MODES)[keyof typeof MODES];
-
-export const API_BASE_URL = "http://localhost:8080";

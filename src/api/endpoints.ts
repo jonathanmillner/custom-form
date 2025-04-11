@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../constants";
+import { API_BASE_URL } from "./config.ts";
 
 async function getForm(formId: string) {
   const res = await fetch(`${API_BASE_URL}/form/${formId}`);
