@@ -6,10 +6,7 @@ async function getForm(formId: string) {
   return res.json();
 }
 
-async function createForm(data: {
-  name: string;
-  fields: Record<string, any>;
-}) {
+async function createForm(data: { name: string; fields: Record<string, any> }) {
   const res = await fetch(`${API_BASE_URL}/form`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -31,5 +28,4 @@ async function createSourceRecord(data: {
   if (!res.ok) throw new Error("Failed to submit source record");
   return res.json();
 }
-
 export { getForm, createForm, createSourceRecord };

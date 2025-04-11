@@ -11,6 +11,7 @@ const NavBar = ({ setMode }: NavBarProps): JSX.Element => {
       >
         Build Form
       </button>
+
       <button onClick={() => setMode(MODES.VIEWER)} className="btn btn-success">
         View Form
       </button>

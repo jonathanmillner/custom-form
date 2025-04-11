@@ -3,18 +3,19 @@ import NavBar from "./components/NavBar";
 import FormBuilder from "./components/FormBuilder/FormBuilder";
 import FormViewer from "./components/FormViewer";
 import { MODES, Mode } from "./constants";
+import { FormResponse } from "./types";
 
 function App() {
   const [mode, setMode] = useState<Mode>(MODES.BUILDER);
-  const [formId, setFormId] = useState("");
+  const [currentForm, setCurrentForm] = useState<FormResponse | null>(null);
 
   return (
     <div className="container mt-4">
       <NavBar setMode={setMode} />
       {mode === MODES.BUILDER ? (
-        <FormBuilder setFormId={setFormId} switchMode={setMode} />
+        <FormBuilder setForm={setCurrentForm} switchMode={setMode} />
       ) : (
-        <FormViewer formId={formId} />
+        <FormViewer form={currentForm} />
       )}
     </div>
   );

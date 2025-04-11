@@ -14,6 +14,7 @@ const FieldForm = ({
 }: FieldFormProps): JSX.Element => {
   return (
     <div className="mb-3">
+
       <label className="form-label">Field Type:</label>
       <select
         value={currentField.type}
@@ -29,6 +30,7 @@ const FieldForm = ({
         <option value="datetime">Datetime</option>
         <option value="boolean">Boolean</option>
       </select>
+
       <label className="form-label">Question:</label>
       <input
         type="text"
@@ -38,6 +40,7 @@ const FieldForm = ({
         }
         className="form-control mb-3"
       />
+
       <div className="mb-3 form-check">
         <input
           type="checkbox"
@@ -52,6 +55,7 @@ const FieldForm = ({
           Required
         </label>
       </div>
+
       <button
         type="button"
         onClick={addField}
