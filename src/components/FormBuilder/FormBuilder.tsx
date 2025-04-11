@@ -1,5 +1,5 @@
 import React, { JSX, useState } from "react";
-import { createForm } from "../../api/endpoints";
+import { createForm } from "../../api";
 import {
   FormBuilderProps,
   FieldDefinition,

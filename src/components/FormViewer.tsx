@@ -1,5 +1,5 @@
 import React, { JSX, useState } from "react";
-import { createSourceRecord } from "../api/endpoints";
+import { createSourceRecord } from "../api";
 import { FormViewerProps } from "../types";
 
 type FormData = Record<string, string | boolean>;
