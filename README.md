@@ -18,20 +18,21 @@ This is the **frontend** of the Custom Form App — a single-page React applicat
 ### 📥 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/custom-form-frontend.git
-cd custom-form-frontend
+git clone https://github.com/YOUR_USERNAME/custom-form.git
+cd custom-form
 npm install
 ```
 
 ### ⚙️ Set the API base URL
-Check `src/api/config.ts` and confirm the backend API URL is correct:
-```bash
+Open `src/api/config.ts` and ensure the backend API URL matches your local or deployed server.
+
+For example:
+```
 export const API_BASE_URL = "http://localhost:8080";
 ```
 
 ### ⚙️ Run the app in development
-Check `src/api/config.ts` and confirm the backend API URL is correct:
-``bash
+```
 npm run dev
 ```
-Visit http://localhost:5173 in your browser.
+Then visit http://localhost:5173 in your browser.
